@@ -6,6 +6,7 @@ package com.qjx.mini.test;
  * @author qinjiaxing on 2023/5/7
  * @author <others>
  */
-public class AService {
+public interface AService {
 
+    void sayHello();
 }
