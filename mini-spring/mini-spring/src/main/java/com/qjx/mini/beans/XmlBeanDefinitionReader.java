@@ -4,25 +4,25 @@ import com.qjx.mini.core.Resource;
 import org.dom4j.Element;
 
 /**
- * <Description>
+ * xml 转 bd
  *
- * @author qinjiaxing on 2023/5/7
+ * @author qinjiaxing on 2023/5/9
  * @author <others>
  */
 public class XmlBeanDefinitionReader {
 
     private BeanFactory beanFactory;
 
-    public XmlBeanDefinitionReader(BeanFactory beanFactory) {
-        this.beanFactory = beanFactory;
+    public XmlBeanDefinitionReader(BeanFactory bf) {
+        this.beanFactory = bf;
     }
 
-    public void loadBeanDefinitions(Resource resource) {
+    public void loadResource(Resource resource) {
         while (resource.hasNext()) {
             Element next = (Element) resource.next();
             String beanId = next.attributeValue("id");
-            String beanClassName = next.attributeValue("class");
-            BeanDefinition beanDefinition = new BeanDefinition(beanId, beanClassName);
+            String name = next.attributeValue("class");
+            BeanDefinition beanDefinition = new BeanDefinition(beanId, name);
             this.beanFactory.registerBeanDefinition(beanDefinition);
         }
     }
