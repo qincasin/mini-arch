@@ -8,9 +8,18 @@ package com.qjx.mini.beans;
  */
 public interface BeanFactory {
 
-    Object getBean(String name) throws NoSuchBeanException;
+    Object getBean(String name) throws BeansException;
+    // void registerBeanDefinition(BeanDefinition bd);
+    //
+    // void registerBean(String beanName, Object obj);
 
-    void registerBeanDefinition(BeanDefinition bd);
+    boolean containsBean(String name);
+
+    boolean isSingleton(String name);
+
+    boolean isPrototype(String name);
+
+    Class<?> getType(String name);
 
 
 }

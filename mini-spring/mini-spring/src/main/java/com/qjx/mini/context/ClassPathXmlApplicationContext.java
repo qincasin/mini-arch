@@ -1,8 +1,7 @@
 package com.qjx.mini.context;
 
-import com.qjx.mini.beans.BeanDefinition;
 import com.qjx.mini.beans.BeanFactory;
-import com.qjx.mini.beans.NoSuchBeanException;
+import com.qjx.mini.beans.BeansException;
 import com.qjx.mini.beans.SimpleBeanFactory;
 import com.qjx.mini.beans.XmlBeanDefinitionReader;
 import com.qjx.mini.core.ClassPathXmlResource;
@@ -18,9 +17,9 @@ import com.qjx.mini.core.ClassPathXmlResource;
  * @author qinjiaxing on 2023/5/7
  * @author <others>
  */
-public class ClassPathXmlApplicationContext implements BeanFactory {
+public class ClassPathXmlApplicationContext implements BeanFactory, ApplicationEventPublisher {
 
-    private BeanFactory beanFactory;
+    private SimpleBeanFactory beanFactory;
 
     /**
      * 改造后做的事情：
@@ -32,19 +31,41 @@ public class ClassPathXmlApplicationContext implements BeanFactory {
      */
     public ClassPathXmlApplicationContext(String fileName) {
         ClassPathXmlResource resource = new ClassPathXmlResource(fileName);
-        BeanFactory bf = new SimpleBeanFactory();
+        SimpleBeanFactory bf = new SimpleBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(bf);
-        reader.loadResource(resource);
+        reader.loadBeanDefinitions(resource);
         this.beanFactory = bf;
     }
 
     @Override
-    public Object getBean(String name) throws NoSuchBeanException {
+    public Object getBean(String name) throws BeansException {
         return this.beanFactory.getBean(name);
     }
 
     @Override
-    public void registerBeanDefinition(BeanDefinition bd) {
-        this.beanFactory.registerBeanDefinition(bd);
+    public boolean containsBean(String name) {
+        return this.beanFactory.containsBean(name);
+    }
+
+    @Override
+    public boolean isSingleton(String name) {
+        return false;
+        // return this.beanFactory.isSingleton(name);
+    }
+
+    @Override
+    public boolean isPrototype(String name) {
+        return false;
+        // return this.beanFactory.isPrototype(name);
+    }
+
+    @Override
+    public Class<?> getType(String name) {
+        return null;
+        // return this.beanFactory.getType(name);
+    }
+
+    @Override
+    public void publishEvnet(ApplicationEvent event) {
     }
 }

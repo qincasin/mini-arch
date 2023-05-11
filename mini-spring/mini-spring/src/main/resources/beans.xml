@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-    <bean id="aservice" class="com.qjx.mini.test.AServiceImpl"></bean>
+    <bean id="aservice" class="com.qjx.mini.test.AServiceImpl">
+        <property type="String" name="property1" value="hello world"/>
+        <property type="String" name="property1" value="Someone says"/>
+        <constructor-arg type="String" name="name" value="abc"/>
+        <constructor-arg type="int" name="level" value="3"/>
+    </bean>
 
 </beans>
