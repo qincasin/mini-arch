@@ -1,6 +1,7 @@
 package com.qjx.mini.beans;
 
 import com.qjx.mini.core.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import org.dom4j.Element;
 
@@ -24,16 +25,6 @@ public class XmlBeanDefinitionReader {
             String beanId = next.attributeValue("id");
             String name = next.attributeValue("class");
             BeanDefinition beanDefinition = new BeanDefinition(beanId, name);
-            // 处理属性
-            List<Element> elements = next.elements("property");
-            PropertyValues propertyValues = new PropertyValues();
-            for (Element element : elements) {
-                String type = element.attributeValue("type");
-                String n = element.attributeValue("name");
-                String value = element.attributeValue("value");
-                propertyValues.addPropertyValue(new PropertyValue(type, n, value));
-            }
-            beanDefinition.setPropertyValues(propertyValues);
             // 处理构造器
             ArgumentValues argumentValues = new ArgumentValues();
             List<Element> constructors = next.elements("constructor-arg");
@@ -44,6 +35,29 @@ public class XmlBeanDefinitionReader {
                 argumentValues.addArgumentValue(new ArgumentValue(pType, pName, pValue));
             }
             beanDefinition.setConstructorArgumentValues(argumentValues);
+            // 处理属性
+            List<Element> elements = next.elements("property");
+            PropertyValues propertyValues = new PropertyValues();
+            List<String> refs = new ArrayList<>();
+            for (Element element : elements) {
+                String type = element.attributeValue("type");
+                String n = element.attributeValue("name");
+                String value = element.attributeValue("value");
+                String ref = element.attributeValue("ref");
+                boolean isRef = false;
+                String pValue = "";
+                if (value != null && value.length() > 0) {
+                    pValue = value;
+                } else if (ref != null && ref.length() > 0) {
+                    isRef = true;
+                    pValue = ref;
+                    refs.add(ref);
+                }
+                propertyValues.addPropertyValue(new PropertyValue(type, n, pValue, isRef));
+            }
+            beanDefinition.setPropertyValues(propertyValues);
+            String[] refArr = refs.toArray(new String[0]);
+            beanDefinition.setDependsOn(refArr);
             this.bf.registerBeanDefinition(beanId, beanDefinition);
         }
     }

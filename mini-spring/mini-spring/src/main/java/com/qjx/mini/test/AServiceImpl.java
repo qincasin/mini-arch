@@ -14,12 +14,22 @@ public class AServiceImpl implements AService {
     private String name;
     private int level;
 
+    private BaseService ref1;
+
     public AServiceImpl() {
     }
 
     public AServiceImpl(String name, int level) {
         this.name = name;
         this.level = level;
+    }
+
+    public BaseService getRef1() {
+        return ref1;
+    }
+
+    public void setRef1(BaseService ref1) {
+        this.ref1 = ref1;
     }
 
     public String getProperty1() {

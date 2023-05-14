@@ -30,9 +30,9 @@ public class PropertyValues {
         this.propertyValueList.add(pv);
     }
 
-    public void addPropertyValue(String propertyType, String propertyName, Object propertyValue) {
-        addPropertyValue(new PropertyValue(propertyType, propertyName, propertyValue));
-    }
+    // public void addPropertyValue(String propertyType, String propertyName, Object propertyValue) {
+    //     addPropertyValue(new PropertyValue(propertyType, propertyName, propertyValue));
+    // }
 
     public void removePropertyValue(PropertyValue pv) {
         this.propertyValueList.remove(pv);

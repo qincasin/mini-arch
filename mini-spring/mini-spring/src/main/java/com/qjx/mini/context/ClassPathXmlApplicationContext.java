@@ -30,11 +30,24 @@ public class ClassPathXmlApplicationContext implements BeanFactory, ApplicationE
      * @param fileName
      */
     public ClassPathXmlApplicationContext(String fileName) {
+        this(fileName, true);
+    }
+
+
+    public ClassPathXmlApplicationContext(String fileName, boolean isRefresh) {
         ClassPathXmlResource resource = new ClassPathXmlResource(fileName);
         SimpleBeanFactory bf = new SimpleBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(bf);
         reader.loadBeanDefinitions(resource);
         this.beanFactory = bf;
+        if (isRefresh) {
+            this.beanFactory.refresh();
+        }
+    }
+
+
+    @Override
+    public void publishEvnet(ApplicationEvent event) {
     }
 
     @Override
@@ -65,7 +78,4 @@ public class ClassPathXmlApplicationContext implements BeanFactory, ApplicationE
         // return this.beanFactory.getType(name);
     }
 
-    @Override
-    public void publishEvnet(ApplicationEvent event) {
-    }
 }

@@ -17,7 +17,7 @@ public class BeanDefinition {
     /**
      * 表示 Bean 要不要在加载的时候初始化，
      */
-    private boolean lazyInit = false;
+    private boolean lazyInit = true;
 
     private String[] dependsOn;
     private ArgumentValues constructorArgumentValues;
