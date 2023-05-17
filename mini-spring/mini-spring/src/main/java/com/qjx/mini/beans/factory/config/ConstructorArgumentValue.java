@@ -1,4 +1,4 @@
-package com.qjx.mini.beans;
+package com.qjx.mini.beans.factory.config;
 
 /**
  * <Description>
@@ -6,18 +6,18 @@ package com.qjx.mini.beans;
  * @author qinjiaxing on 2023/5/10
  * @author <others>
  */
-public class ArgumentValue {
+public class ConstructorArgumentValue {
 
     private Object value;
     private String type;
     private String name;
 
-    public ArgumentValue(String type, String name) {
+    public ConstructorArgumentValue(String type, String name) {
         this.type = type;
         this.name = name;
     }
 
-    public ArgumentValue(String type, String name, String value) {
+    public ConstructorArgumentValue(String type, String name, String value) {
         this.type = type;
         this.value = value;
         this.name = name;

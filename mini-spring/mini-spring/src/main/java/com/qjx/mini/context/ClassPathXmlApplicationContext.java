@@ -1,9 +1,9 @@
 package com.qjx.mini.context;
 
-import com.qjx.mini.beans.BeanFactory;
+import com.qjx.mini.beans.factory.BeanFactory;
 import com.qjx.mini.beans.BeansException;
-import com.qjx.mini.beans.SimpleBeanFactory;
-import com.qjx.mini.beans.XmlBeanDefinitionReader;
+import com.qjx.mini.beans.factory.support.SimpleBeanFactory;
+import com.qjx.mini.beans.factory.xml.XmlBeanDefinitionReader;
 import com.qjx.mini.core.ClassPathXmlResource;
 
 /**

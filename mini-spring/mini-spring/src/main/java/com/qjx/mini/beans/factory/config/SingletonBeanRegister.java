@@ -1,4 +1,4 @@
-package com.qjx.mini.beans;
+package com.qjx.mini.beans.factory.config;
 
 /**
  * 管理单例bean

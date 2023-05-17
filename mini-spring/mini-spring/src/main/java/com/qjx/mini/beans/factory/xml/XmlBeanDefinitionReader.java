@@ -1,5 +1,11 @@
-package com.qjx.mini.beans;
+package com.qjx.mini.beans.factory.xml;
 
+import com.qjx.mini.beans.factory.config.ConstructorArgumentValue;
+import com.qjx.mini.beans.factory.config.ConstructorArgumentValues;
+import com.qjx.mini.beans.BeanDefinition;
+import com.qjx.mini.beans.PropertyValue;
+import com.qjx.mini.beans.PropertyValues;
+import com.qjx.mini.beans.factory.support.SimpleBeanFactory;
 import com.qjx.mini.core.Resource;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +32,13 @@ public class XmlBeanDefinitionReader {
             String name = next.attributeValue("class");
             BeanDefinition beanDefinition = new BeanDefinition(beanId, name);
             // 处理构造器
-            ArgumentValues argumentValues = new ArgumentValues();
+            ConstructorArgumentValues argumentValues = new ConstructorArgumentValues();
             List<Element> constructors = next.elements("constructor-arg");
             for (Element constructor : constructors) {
                 String pType = constructor.attributeValue("type");
                 String pName = constructor.attributeValue("name");
                 String pValue = constructor.attributeValue("value");
-                argumentValues.addArgumentValue(new ArgumentValue(pType, pName, pValue));
+                argumentValues.addArgumentValue(new ConstructorArgumentValue(pType, pName, pValue));
             }
             beanDefinition.setConstructorArgumentValues(argumentValues);
             // 处理属性

@@ -1,5 +1,12 @@
-package com.qjx.mini.beans;
+package com.qjx.mini.beans.factory.support;
 
+import com.qjx.mini.beans.factory.config.ConstructorArgumentValue;
+import com.qjx.mini.beans.factory.config.ConstructorArgumentValues;
+import com.qjx.mini.beans.BeanDefinition;
+import com.qjx.mini.beans.BeansException;
+import com.qjx.mini.beans.PropertyValue;
+import com.qjx.mini.beans.PropertyValues;
+import com.qjx.mini.beans.factory.BeanFactory;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -145,14 +152,14 @@ public class SimpleBeanFactory extends DefaultSingletonBeanRegistry implements B
         try {
             clz = Class.forName(bd.getClassName());
             // handle constructor
-            ArgumentValues argumentValues = bd.getConstructorArgumentValues();
+            ConstructorArgumentValues argumentValues = bd.getConstructorArgumentValues();
             if (argumentValues.isEmpty()) {
                 obj = clz.getDeclaredConstructor().newInstance();
             } else {
                 Class<?>[] paramTypes = new Class<?>[argumentValues.getArgumentCount()];
                 Object[] paramValues = new Object[argumentValues.getArgumentCount()];
                 for (int i = 0; i < argumentValues.getArgumentCount(); i++) {
-                    ArgumentValue argumentValue = argumentValues.getIndexedArgumentValue(i);
+                    ConstructorArgumentValue argumentValue = argumentValues.getIndexedArgumentValue(i);
                     if ("String".equals(argumentValue.getType()) || "java.lang.String".equals(argumentValue.getType())) {
                         paramTypes[i] = String.class;
                         paramValues[i] = argumentValue.getValue();

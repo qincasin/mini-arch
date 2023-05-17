@@ -1,7 +1,6 @@
 package com.qjx.mini.beans;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.qjx.mini.beans.factory.config.ConstructorArgumentValues;
 
 /**
  * <Description>
@@ -20,7 +19,7 @@ public class BeanDefinition {
     private boolean lazyInit = true;
 
     private String[] dependsOn;
-    private ArgumentValues constructorArgumentValues;
+    private ConstructorArgumentValues constructorArgumentValues;
     private PropertyValues propertyValues;
 
     /**
@@ -101,13 +100,13 @@ public class BeanDefinition {
         this.dependsOn = dependsOn;
     }
 
-    public ArgumentValues getConstructorArgumentValues() {
+    public ConstructorArgumentValues getConstructorArgumentValues() {
         return this.constructorArgumentValues;
     }
 
-    public void setConstructorArgumentValues(ArgumentValues constructorArgumentValues) {
+    public void setConstructorArgumentValues(ConstructorArgumentValues constructorArgumentValues) {
         this.constructorArgumentValues =
-                (constructorArgumentValues != null ? constructorArgumentValues : new ArgumentValues());
+                (constructorArgumentValues != null ? constructorArgumentValues : new ConstructorArgumentValues());
     }
 
     public boolean hasConstructorArgumentValues() {

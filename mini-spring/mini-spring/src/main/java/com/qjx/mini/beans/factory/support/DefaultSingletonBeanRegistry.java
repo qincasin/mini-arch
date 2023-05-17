@@ -1,5 +1,6 @@
-package com.qjx.mini.beans;
+package com.qjx.mini.beans.factory.support;
 
+import com.qjx.mini.beans.factory.config.SingletonBeanRegister;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

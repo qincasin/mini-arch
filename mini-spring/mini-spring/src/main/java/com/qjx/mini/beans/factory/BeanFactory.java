@@ -1,4 +1,6 @@
-package com.qjx.mini.beans;
+package com.qjx.mini.beans.factory;
+
+import com.qjx.mini.beans.BeansException;
 
 /**
  * <Description>
