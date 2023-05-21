@@ -16,3 +16,6 @@
 - 扩展 BeanDefinition，添加一些属性，现在它只有 id 和 class 两个属性，我们要进一步地丰富它。
 
 ## ioc3
+
+## ioc4
+![img_3.png](img_3.png)
