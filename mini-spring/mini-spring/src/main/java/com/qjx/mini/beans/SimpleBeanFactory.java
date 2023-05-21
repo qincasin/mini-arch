@@ -1,12 +1,12 @@
-package com.qjx.mini.beans.factory.support;
+package com.qjx.mini.beans;
 
+import com.qjx.mini.beans.factory.BeanFactory;
+import com.qjx.mini.beans.factory.BeansException;
+import com.qjx.mini.beans.factory.config.BeanDefinition;
 import com.qjx.mini.beans.factory.config.ConstructorArgumentValue;
 import com.qjx.mini.beans.factory.config.ConstructorArgumentValues;
-import com.qjx.mini.beans.factory.config.BeanDefinition;
-import com.qjx.mini.beans.factory.BeansException;
-import com.qjx.mini.beans.PropertyValue;
-import com.qjx.mini.beans.PropertyValues;
-import com.qjx.mini.beans.factory.BeanFactory;
+import com.qjx.mini.beans.factory.support.BeanDefinitionRegistry;
+import com.qjx.mini.beans.factory.support.DefaultSingletonBeanRegistry;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

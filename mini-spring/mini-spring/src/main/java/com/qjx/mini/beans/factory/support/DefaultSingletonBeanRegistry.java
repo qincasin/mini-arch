@@ -50,6 +50,4 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegister {
             this.singletons.remove(beanName);
         }
     }
-
-
 }

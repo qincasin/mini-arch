@@ -2,9 +2,9 @@ package com.qjx.mini.beans.factory.support;
 
 import com.qjx.mini.beans.PropertyValue;
 import com.qjx.mini.beans.PropertyValues;
-import com.qjx.mini.beans.factory.BeanFactory;
 import com.qjx.mini.beans.factory.BeansException;
 import com.qjx.mini.beans.factory.config.BeanDefinition;
+import com.qjx.mini.beans.factory.config.ConfigurableBeanFactory;
 import com.qjx.mini.beans.factory.config.ConstructorArgumentValue;
 import com.qjx.mini.beans.factory.config.ConstructorArgumentValues;
 import java.lang.reflect.Constructor;
@@ -21,14 +21,14 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author qinjiaxing on 2023/5/17
  * @author <others>
  */
-public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory, BeanDefinitionRegistry {
+public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements ConfigurableBeanFactory, BeanDefinitionRegistry {
 
     // 存储早期bean 的对象
-    Map<String, Object> earlySingletonObjects = new ConcurrentHashMap<>(16);
+    private Map<String, Object> earlySingletonObjects = new ConcurrentHashMap<>(16);
     // 存储beanName 和 beandefition的 map
-    Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
+    protected Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
     // 存储 beanName list
-    private List<String> beanDefinitionNames = new ArrayList<>();
+    protected List<String> beanDefinitionNames = new ArrayList<>();
 
     public AbstractBeanFactory() {
     }

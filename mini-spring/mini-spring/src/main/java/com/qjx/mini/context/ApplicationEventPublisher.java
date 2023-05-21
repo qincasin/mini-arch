@@ -8,5 +8,9 @@ package com.qjx.mini.context;
  */
 public interface ApplicationEventPublisher {
 
-    void publishEvnet(ApplicationEvent event);
+    void publishEvent(ApplicationEvent event);
+
+    void addApplicationListener(ApplicationListener listener);
+
+
 }

@@ -1,5 +1,6 @@
 package com.qjx.mini.beans.factory.config;
 
+import com.qjx.mini.beans.factory.BeanFactory;
 import com.qjx.mini.beans.factory.BeansException;
 
 /**
@@ -14,4 +15,5 @@ public interface BeanPostProcessor {
 
     Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException;
 
+    void setBeanFactory(BeanFactory beanFactory);
 }
