@@ -31,13 +31,17 @@ public class Test1 {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         AService aService;
-        BaseService bService ;
+        BaseService bService;
         try {
+            aService = (AService) context.getBean("aservice");
+            aService.sayHello();
+            //
             bService = (BaseService) context.getBean("baseservice");
             bService.sayHello();
-        }catch (BeansException e){
+        } catch (BeansException e) {
+            e.printStackTrace();
 
         }
     }
