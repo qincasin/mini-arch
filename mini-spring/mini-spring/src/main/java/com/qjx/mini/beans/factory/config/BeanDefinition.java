@@ -1,5 +1,6 @@
-package com.qjx.mini.beans;
+package com.qjx.mini.beans.factory.config;
 
+import com.qjx.mini.beans.PropertyValues;
 import com.qjx.mini.beans.factory.config.ConstructorArgumentValues;
 
 /**

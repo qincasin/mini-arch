@@ -1,4 +1,4 @@
-package com.qjx.mini.beans;
+package com.qjx.mini.beans.factory;
 
 /**
  * <Description>

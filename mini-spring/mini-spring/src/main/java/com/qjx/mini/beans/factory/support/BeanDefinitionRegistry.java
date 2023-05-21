@@ -1,6 +1,6 @@
 package com.qjx.mini.beans.factory.support;
 
-import com.qjx.mini.beans.BeanDefinition;
+import com.qjx.mini.beans.factory.config.BeanDefinition;
 
 /**
  * 一个存放 BeanDefinition 的仓库，可以存放、移除、获取及判断 BeanDefinition 对象

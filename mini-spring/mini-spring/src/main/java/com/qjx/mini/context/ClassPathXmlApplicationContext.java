@@ -1,10 +1,15 @@
 package com.qjx.mini.context;
 
 import com.qjx.mini.beans.factory.BeanFactory;
-import com.qjx.mini.beans.BeansException;
-import com.qjx.mini.beans.factory.support.SimpleBeanFactory;
+import com.qjx.mini.beans.factory.BeansException;
+import com.qjx.mini.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import com.qjx.mini.beans.factory.config.AutowireCapableBeanFactory;
+import com.qjx.mini.beans.factory.config.BeanFactoryPostProcess;
 import com.qjx.mini.beans.factory.xml.XmlBeanDefinitionReader;
 import com.qjx.mini.core.ClassPathXmlResource;
+import com.qjx.mini.core.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <Description>
@@ -19,7 +24,9 @@ import com.qjx.mini.core.ClassPathXmlResource;
  */
 public class ClassPathXmlApplicationContext implements BeanFactory, ApplicationEventPublisher {
 
-    private SimpleBeanFactory beanFactory;
+    private AutowireCapableBeanFactory beanFactory;
+
+    private List<BeanFactoryPostProcess> beanFactoryPostProcesses = new ArrayList<>();
 
     /**
      * 改造后做的事情：
@@ -35,15 +42,25 @@ public class ClassPathXmlApplicationContext implements BeanFactory, ApplicationE
 
 
     public ClassPathXmlApplicationContext(String fileName, boolean isRefresh) {
-        ClassPathXmlResource resource = new ClassPathXmlResource(fileName);
-        SimpleBeanFactory bf = new SimpleBeanFactory();
+        Resource resource = new ClassPathXmlResource(fileName);
+        // bf
+        AutowireCapableBeanFactory bf = new AutowireCapableBeanFactory();
+        // reader
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(bf);
+        // load
         reader.loadBeanDefinitions(resource);
+        // set bf
         this.beanFactory = bf;
         if (isRefresh) {
-            this.beanFactory.refresh();
+            try {
+                refresh();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
+
+
 
 
     @Override
@@ -76,6 +93,31 @@ public class ClassPathXmlApplicationContext implements BeanFactory, ApplicationE
     public Class<?> getType(String name) {
         return null;
         // return this.beanFactory.getType(name);
+    }
+
+
+    public List<BeanFactoryPostProcess> getBeanFactoryPostProcesses() {
+        return beanFactoryPostProcesses;
+    }
+
+    public void setBeanFactoryPostProcesses(List<BeanFactoryPostProcess> beanFactoryPostProcesses) {
+        this.beanFactoryPostProcesses = beanFactoryPostProcesses;
+    }
+
+    private void refresh() {
+        // Register bean processors that intercept bean creation.
+        registerBeanPostProcessors(this.beanFactory);
+        // Initialize other special beans in specific context subclasses.
+        onRefresh();
+    }
+
+    private void registerBeanPostProcessors(AutowireCapableBeanFactory bf) {
+        bf.addBeanPostProcessor(new AutowiredAnnotationBeanPostProcessor());
+    }
+
+
+    private void onRefresh() {
+        this.beanFactory.refresh();
     }
 
 }

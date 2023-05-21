@@ -1,5 +1,7 @@
 package com.qjx.mini.test;
 
+import com.qjx.mini.beans.factory.annotation.Autowired;
+
 /**
  * <Description>
  *
@@ -8,6 +10,7 @@ package com.qjx.mini.test;
  */
 public class BaseService {
 
+    @Autowired
     private BaseBaseService bbs;
 
     public BaseService() {
@@ -23,6 +26,11 @@ public class BaseService {
 
     public void sayHello() {
         System.out.println("这里是 base service says hello ");
-        this.bbs.sayHello();
+        bbs.sayHello();
     }
+
+    public void init() {
+        System.out.print("Base Service init method.");
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.qjx.mini.test;
 
 
+import com.qjx.mini.beans.factory.BeansException;
 import com.qjx.mini.context.ClassPathXmlApplicationContext;
 
 /**
@@ -31,8 +32,14 @@ public class Test1 {
      */
     public static void main(String[] args) throws Exception {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        AService aService = (AService) context.getBean("aservice");
-        aService.sayHello();
+        AService aService;
+        BaseService bService ;
+        try {
+            bService = (BaseService) context.getBean("baseservice");
+            bService.sayHello();
+        }catch (BeansException e){
+
+        }
     }
 
 }
