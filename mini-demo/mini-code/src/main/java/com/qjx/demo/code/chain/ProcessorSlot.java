@@ -1,5 +1,7 @@
 package com.qjx.demo.code.chain;
 
+import com.qjx.demo.code.chain.context.Context;
+
 /**
  * <Description>
  *
@@ -8,4 +10,11 @@ package com.qjx.demo.code.chain;
  */
 public interface ProcessorSlot<T> {
 
+    void entry(Context context, T param);
+
+    void fireEntry(Context context, Object param);
+
+    void exit(Context context);
+
+    void fireExit(Context context);
 }
