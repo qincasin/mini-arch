@@ -81,7 +81,7 @@ import org.slf4j.LoggerFactory;
  * @see ServiceLoader
  */
 public final class SpiLoader<S> {
-    private final Logger logger = LoggerFactory.getLogger(SpiLoader.class);
+    private static final Logger logger = LoggerFactory.getLogger(SpiLoader.class);
 
     // Default path for the folder of Provider configuration file
     private static final String SPI_FILE_PREFIX = "META-INF/services/";
@@ -238,7 +238,6 @@ public final class SpiLoader<S> {
      */
     public S loadFirstInstanceOrDefault() {
         load();
-
         for (Class<? extends S> clazz : classList) {
             if (defaultClass == null || clazz != defaultClass) {
                 return createInstance(clazz);

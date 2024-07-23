@@ -32,6 +32,7 @@ public class DemoApplication {
                 chain.exit(context);
             }
         }
+        logger.info("end");
     }
 
 }
