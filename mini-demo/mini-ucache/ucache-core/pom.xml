@@ -14,10 +14,17 @@
     <name>${project.artifactId}</name>
 
     <properties>
+    
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        
+        
         <dependency>
             <groupId>com.yxt.ucache</groupId>
             <artifactId>ucache-common</artifactId>
@@ -109,6 +116,9 @@
             <version>5.8.1</version>
             <scope>test</scope>
         </dependency>
+        
+        
+        
     </dependencies>
 
 </project>
