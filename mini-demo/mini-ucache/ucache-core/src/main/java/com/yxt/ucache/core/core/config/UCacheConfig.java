@@ -1,4 +1,4 @@
-package com.yxt.ucache.core.config;
+package com.yxt.ucache.core.core.config;
 
 import com.yxt.ucache.common.SerialPolicy;
 import com.yxt.ucache.common.constants.CacheConstants;

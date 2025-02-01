@@ -1,4 +1,4 @@
-package com.yxt.ucache.core.config;
+package com.yxt.ucache.core.core.config;
 
 import java.time.Duration;
 import lombok.Getter;

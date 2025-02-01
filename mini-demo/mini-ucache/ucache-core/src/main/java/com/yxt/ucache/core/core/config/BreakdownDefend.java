@@ -1,4 +1,4 @@
-package com.yxt.ucache.core.config;
+package com.yxt.ucache.core.core.config;
 
 import com.yxt.ucache.common.enums.BreakdownType;
 import java.time.Duration;
