@@ -39,14 +39,22 @@ public interface CacheProxy extends CacheClient {
     default void setProxy(CacheProxy proxy) {
 
     }
-    default void setFilter(Filter filter) {
-
-    }
 
     default Filter getFilter() {
         return null;
     }
 
+    default void setFilter(Filter filter) {
+
+    }
+
+    /**
+     * 获取锁
+     * 会根据参数优先选择一个锁, 如果没有对应的, 则选一个可用的锁
+     *
+     * @param biasBlock 是否 优先选择阻塞锁(JVM锁)
+     * @return
+     */
     default CacheLock getCacheLocker(boolean biasBlock) {
         return null;
     }

@@ -5,9 +5,12 @@ import com.yxt.ucache.common.SerialPolicy;
 import com.yxt.ucache.common.ValWrapper;
 import com.yxt.ucache.core.GZIPSerializerWrapper;
 import com.yxt.ucache.core.StringSerializerWrapper;
+import com.yxt.ucache.core.event.EventListener;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +25,7 @@ public final class UCacheManager {
 
     private static Logger logger = LoggerFactory.getLogger(UCacheManager.class);
     private static Map<String, SerialPolicy> serialPolicyMap = new ConcurrentHashMap<>();
+    private static List<EventListener> listeners = new CopyOnWriteArrayList<>();
 
     /**
      * 初始化序列化选择器
@@ -54,6 +58,18 @@ public final class UCacheManager {
     private UCacheManager() {
     }
 
+    public static List<EventListener> getEventListeners() {
+        return listeners;
+    }
+
+    public static void addEventListener(EventListener listener) {
+        if (listener == null) {
+            return;
+        }
+        listeners.add(listener);
+    }
+
+
     public static void addSerialPolicy(String name, SerialPolicy policy) {
         if (StringUtils.isEmpty(name) || policy == null) {
             return;
@@ -77,6 +93,7 @@ public final class UCacheManager {
 
     private static void close() {
         serialPolicyMap.clear();
+        listeners.clear();
     }
 
 }
