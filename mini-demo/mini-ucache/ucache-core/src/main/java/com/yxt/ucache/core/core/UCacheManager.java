@@ -6,6 +6,7 @@ import com.yxt.ucache.common.ValWrapper;
 import com.yxt.ucache.core.GZIPSerializerWrapper;
 import com.yxt.ucache.core.StringSerializerWrapper;
 import com.yxt.ucache.core.event.EventListener;
+import com.yxt.ucache.core.filter.AbsInvokeFilter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ public final class UCacheManager {
     private static Logger logger = LoggerFactory.getLogger(UCacheManager.class);
     private static Map<String, SerialPolicy> serialPolicyMap = new ConcurrentHashMap<>();
     private static List<EventListener> listeners = new CopyOnWriteArrayList<>();
+    private static List<AbsInvokeFilter> allFilterList = new CopyOnWriteArrayList<>();
 
     /**
      * 初始化序列化选择器
@@ -91,9 +93,14 @@ public final class UCacheManager {
         return serialPolicyMap.getOrDefault(name, defaultIfAbsent);
     }
 
+    public static void addFilter(AbsInvokeFilter filter) {
+        allFilterList.add(filter);
+    }
+
     private static void close() {
         serialPolicyMap.clear();
         listeners.clear();
+        allFilterList.clear();
     }
 
 }

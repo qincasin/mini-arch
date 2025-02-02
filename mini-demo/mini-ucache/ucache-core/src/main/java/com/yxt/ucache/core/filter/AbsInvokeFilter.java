@@ -168,6 +168,10 @@ public abstract class AbsInvokeFilter implements Filter<FilterContext> {
         return this;
     }
 
+    public void setForNamespace(String forNamespace) {
+        this.forNamespace = forNamespace;
+    }
+
     public String getName() {
         return name;
     }
